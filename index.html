@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAWND Room Booking</title>
+    <link rel="website icon" type="jpg"
+    href="./img/logo mamas.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html{
+        scroll-behavior: smooth;
+      }
+        .parallax {
+            background-image: url('./img/leonardo-186107-182743164-542466.jpg'); /* Ganti dengan URL gambar latar belakang Anda */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Membuat gambar latar belakang tetap */
+            background-position: center center;
+            height: 100vh;
+            position: relative;
+            will-change: transform;
+        }
+
+        .content-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer-logo {
+            width: 130px; 
+            height: auto;
+        }
+
+
+    </style>
+</head>
+
+<body class="font-sans bg-gray-100">
+
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-10 bg-black bg-opacity-50 text-white py-4 transition-all duration-300">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <a href="#" class="flex items-center">
+        <img src="./img/logo mamas.jpg" alt="Logo" class="h-8 mr-2"> <!-- Logo Image -->
+        <span class="text-white text-lg font-bold">RAWND Room Booking</span>
+      </a>
+      
+      <!-- Menu untuk layar besar -->
+      <div class="space-x-4 hidden md:flex">
+        <a href="#home" class="hover:text-gray-300">Beranda</a>
+        <a href="#tentang" class="hover:text-gray-300">Profil perusahaan</a>
+        <a href="#ruangan" class="hover:text-gray-300">Ruangan</a>
+        <a href="#kontak" class="hover:text-gray-300">Kontak</a>
+        <a href="#pengembang" class="hover:text-gray-300">Profil pengembang</a>
+        <a href="./login.html" class="hover:text-gray-300">Login</a>
+      </div>
+  
+      <!-- Hamburger Icon untuk layar kecil -->
+      <div class="md:hidden flex items-center">
+        <button id="hamburger" class="text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  
+    <!-- Menu dropdown untuk layar kecil -->
+    <div id="mobile-menu" class="md:hidden hidden bg-black bg-opacity-50 text-white py-1 space-y-1 flex flex-col items-start absolute top-full right-0 mt-2">
+      <a href="#home" class="block hover:text-gray-300 py-1 pl-4">Beranda</a>
+      <a href="#tentang" class="block hover:text-gray-300 py-1 pl-4">Profil perusahaan</a>
+      <a href="#ruangan" class="block hover:text-gray-300 py-1 pl-4">Ruangan</a>
+      <a href="#kontak" class="block hover:text-gray-300 py-1 pl-4">Kontak</a>
+      <a href="#pengembang" class="block hover:text-gray-300 py-1 pl-4">Profil pengembang</a>
+      <a href="./login.html" class="block hover:text-gray-300 py-1 pl-4">Login</a>
+    </div>
+  </nav>
+  
+  <script>
+    // Toggle menu dropdown untuk tampilan mobile
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+  
+<!-- CSS -->
+<style>
+  #navbar {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navbar-hidden {
+    transform: translateY(-100%); /* Menyembunyikan navbar */
+  }
+
+  .navbar-visible {
+    transform: translateY(0); /* Menampilkan navbar */
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+  let lastScrollTop = 0;
+  const navbar = document.getElementById('navbar');
+
+  // Fungsi untuk menangani scroll
+  window.addEventListener('scroll', function () {
+    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+      navbar.classList.add('navbar-hidden');
+      navbar.classList.remove('navbar-visible');
+    } else {
+      navbar.classList.add('navbar-visible');
+      navbar.classList.remove('navbar-hidden');
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
+  // Fungsi untuk mendeteksi pergerakan kursor
+  document.addEventListener('mousemove', function (e) {
+    if (e.clientY <= 100) {
+      navbar.classList.add('navbar-visible');
+      navbar.classList.remove('navbar-hidden');
+    }
+  });
+</script>
+
+    <!-- Parallax Section -->
+    <div id="home" class="parallax" data-speed="0.5">
+        <div class="h-full flex flex-col items-center justify-center text-white text-center bg-black bg-opacity-40">
+            <p class="text-lg mb-6"> Welcome to RAWND Booking</p>
+            <h1 class="text-5xl font-bold mb-4">ROOM BOOKING SYSTEM</h1>
+            <a href="#ruangan" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-700">Booking Now</a>
+        </div>
+    </div>
+
+    
+   <!-- Form Section -->
+   <section class="mt-6 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Tanggal Awal -->
+            <div>
+                <label for="tanggalAwal" class="block text-sm font-medium text-gray-700">Tanggal Awal</label>
+                <div class="relative mt-1">
+                    <input type="date" id="tanggalAwal" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500">
+                </div>
+            </div>
+
+            <!-- Tanggal Akhir -->
+            <div>
+                <label for="tanggalAkhir" class="block text-sm font-medium text-gray-700">Tanggal Akhir</label>
+                <div class="relative mt-1">
+                    <input type="date" id="tanggalAkhir" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500">
+                </div>
+            </div>
+
+            <!-- Pilih Gedung -->
+            <div>
+                <label for="gedung" class="block text-sm font-medium text-gray-700">Gedung</label>
+                <div class="relative mt-1">
+                    <select id="gedung" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500">
+                        <option>-- Pilih Gedung --</option>
+                        <option>Auditorium 1</option>
+                        <option>Auditorium 2</option>
+                        <option>Ruangan 1</option>
+                        <option>Ruangan 2</option>
+                        <option>Ruangan 3</option>
+                        <option>Ruangan 4</option>
+                        <option>Ruangan 5</option>
+                        <option>Ruangan 6</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Button Check -->
+            <div class="flex items-end">
+                <button id="checkButton" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md shadow-md">
+                    Check
+                </button>
+            </div>
+        </div>
+
+        
+</section>
+
+<!-- Modal for Status Message -->
+<div id="statusModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+        <div id="modalMessage" class="text-sm font-medium text-gray-700 mb-4"></div>
+        <div class="flex justify-between">
+            <button id="closeModalButton" class="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-md">
+                Close
+            </button>
+            <button id="resetModalButton" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">
+                Reset
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Menangani event klik pada tombol check
+    document.getElementById("checkButton").addEventListener("click", function() {
+        // Mengambil nilai dari input form
+        const tanggalAwal = document.getElementById("tanggalAwal").value;
+        const tanggalAkhir = document.getElementById("tanggalAkhir").value;
+        const gedung = document.getElementById("gedung").value;
+
+        // Validasi jika ada input yang belum diisi
+        if (!tanggalAwal || !tanggalAkhir || gedung === "-- Pilih Gedung --") {
+            displayModal("Semua field harus diisi.", "error");
+            return;
+        }
+
+        // Logika untuk memeriksa apakah gedung sudah terbooking (simulasi)
+        const isAvailable = checkAvailability(tanggalAwal, tanggalAkhir, gedung);
+
+        // Menampilkan status booking
+        const message = isAvailable 
+            ? `Ruang di ${gedung} tersedia untuk tanggal ${tanggalAwal} hingga ${tanggalAkhir}.`
+            : `Ruang di ${gedung} sudah terbooking untuk tanggal ${tanggalAwal} hingga ${tanggalAkhir}.`;
+        
+        displayModal(message, isAvailable ? "success" : "error");
+    });
+
+    // Fungsi untuk simulasi pengecekan ketersediaan ruang
+    function checkAvailability(tanggalAwal, tanggalAkhir, gedung) {
+        // Di sini, Anda bisa menambahkan logika untuk memeriksa data sebenarnya.
+        // Untuk simulasi, kita anggap Gedung A selalu terbooking antara tanggal 1 dan 5 Januari.
+        if (gedung === "Gedung A" && (tanggalAwal <= "2025-01-05" && tanggalAkhir >= "2025-01-01")) {
+            return false; // Gedung A terbooking
+        }
+        return true; // Gedung lain atau tanggal yang berbeda tersedia
+    }
+
+    // Menampilkan modal dengan pesan
+    function displayModal(message, type) {
+        const modalMessage = document.getElementById("modalMessage");
+        const statusModal = document.getElementById("statusModal");
+
+        modalMessage.textContent = message;
+
+        // Menambahkan warna berdasarkan tipe status
+        if (type === "success") {
+            modalMessage.classList.add("text-green-500");
+            modalMessage.classList.remove("text-red-500");
+        } else if (type === "error") {
+            modalMessage.classList.add("text-red-500");
+            modalMessage.classList.remove("text-green-500");
+        }
+
+        // Menampilkan modal
+        statusModal.classList.remove("hidden");
+    }
+
+    // Menangani event klik pada tombol close modal
+    document.getElementById("closeModalButton").addEventListener("click", function() {
+        const statusModal = document.getElementById("statusModal");
+        statusModal.classList.add("hidden");
+    });
+
+    // Menangani event klik pada tombol reset form
+    document.getElementById("resetModalButton").addEventListener("click", function() {
+        // Mengosongkan input form
+        document.getElementById("tanggalAwal").value = "";
+        document.getElementById("tanggalAkhir").value = "";
+        document.getElementById("gedung").value = "-- Pilih Gedung --";
+        
+        // Menutup modal
+        const statusModal = document.getElementById("statusModal");
+        statusModal.classList.add("hidden");
+    });
+
+    // Menangani event klik pada tombol reset form
+    document.getElementById("resetButton").addEventListener("click", function() {
+        // Mengosongkan input form
+        document.getElementById("tanggalAwal").value = "";
+        document.getElementById("tanggalAkhir").value = "";
+        document.getElementById("gedung").value = "-- Pilih Gedung --";
+
+        // Menutup modal jika terbuka
+        const statusModal = document.getElementById("statusModal");
+        statusModal.classList.add("hidden");
+    });
+</script>
+
+<!--profil perusahaan-->
+<section class="tentang py-16">
+  <h2 id="tentang" class="text-3xl font-semibold text-center mb-8">Profil Perusahaan</h2>
+
+  <div class="flex flex-col lg:flex-row items-center gap-8">
+      <!-- Gambar Kiri -->
+      <div class="img flex-1 flex justify-center">
+          <img src="./img/logo mamas.jpg" alt="Tentang Kami" class="w-full h-auto rounded-lg shadow-md max-w-md">
+      </div>
+      <!-- deskirpsi Kanan -->
+      <div class="content flex-1">
+        <h2 class="text-2xl font-semibold mb-4">Room Booking System</h2>
+        <p class="text-lg leading-relaxed">Room Booking System Adalah Sitem Peminjaman Ruangan yang memudahkan penyewa dalam meminjam ruangan yang tersedia di RAWND Booking</p>
+      </div>
+  </div>
+
+  <div class="tentang1 mt-16">
+    <div class="flex flex-col lg:flex-row-reverse items-center gap-8">
+        <!-- Gambar Kanan -->
+        <div class="img flex-1 flex justify-center">
+            <img src="./img/logo mamas.jpg" alt="Gambar" class="w-full h-auto rounded-lg shadow-md max-w-md">
+        </div>
+        <!-- deskripsi Kiri -->
+        <div class="content flex-1 text-center lg:text-left">
+            <p class="text-lg leading-relaxed mx-4 text-justify">
+                RAWND adalah platform pemesanan Ruang dan akomodasi yang menawarkan solusi praktis dan mudah bagi para bisnis, maupun individu yang mencari ruang pertemuan. Dengan menggunakan teknologi canggih, kami mempermudah proses pemesanan, memberikan informasi yang transparan, serta pengalaman meeting yang menyenangkan.
+            </p>
+            <p class="text-lg leading-relaxed mx-4 text-justify">
+                Kami bekerja sama dengan berbagai Penyedia Tempat dan penyedia akomodasi terkemuka, serta menawarkan berbagai pilihan Ruangan mulai dari budget-friendly hingga mewah. Tim RAWND berdedikasi untuk memberikan pelayanan terbaik dan memastikan bahwa setiap pertemuan Anda lebih lancar dan menyenangkan.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+</section>
+
+
+
+
+    <!--daftar ruangan-->
+    <section class="mt-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 id="ruangan" class="text-center text-2xl font-bold text-gray-800 mb-8"> Daftar Ruangan</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="img/audit.png" alt="Auditorium" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-teal-600">Auditorium 1</h3>
+                        <div class="flex gap-2 mt-4">
+                          <button class="w-1/2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg" onclick="showRoomDetails('Auditorium 1', 'RAWND Hotel', '1', '300 orang')">
+                            View Details
+                        </button>
+                        <a href="#kontak" class="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+                          Booking
+                      </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://cdn.shopify.com/s/files/1/0702/2834/5113/files/Desain-Ruang-Rapat-Minimalis.webp" alt="Lab B2 206" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-teal-600">Ruangan 1</h3>
+                        <div class="flex gap-2 mt-4">
+                          <button class="w-1/2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg" onclick="showRoomDetails('Ruangan 1', 'RAWND Hotel', '2', '10 orang')">
+                            View Details
+                        </button>
+                        <a href="#kontak" class="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+                          Booking
+                      </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://production-deskimo-wordpress.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2023/09/30042713/Preview-Ruang-Rapat-Deskimo.jpg" alt="Lab B2 205A" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-teal-600">Ruangan 2</h3>
+                        <div class="flex gap-2 mt-4">
+                          <button class="w-1/2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg" onclick="showRoomDetails('Ruangan 2', 'RAWND Hotel', '2', '8 orang')">
+                            View Details
+                        </button>
+                        <a href="#kontak" class="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+                          Booking
+                      </a>
+                        </div>
+                    </div>
+                </div>
+
+               <!-- Card 4 -->
+                   <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                   <img src="https://production-deskimo-wordpress.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2023/01/21104743/3d-rendering-seminar-meeting-room-2021-08-28-13-02-39-utc-min-scaled.jpg" alt="Lab B2 205A" class="w-full h-40 object-cover">
+                   <div class="p-4">
+                          <h3 class="text-lg font-bold text-teal-600">Ruangan 3</h3>
+                              <div class="flex gap-2 mt-4">
+                                <button class="w-1/2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg" onclick="showRoomDetails('Ruangan 3', 'RAWND Hotel', '2', '20 orang')">
+                                  View Details
+                              </button>
+                              <a href="#kontak" class="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+                                Booking
+                            </a>
+                                 </div>
+                            </div>
+                         </div>
+
+                 <!-- Card 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                  <img src="https://schmidt-arch.com/wp-content/uploads/2016/06/lakecentralhs13.jpg" alt="Lab B2 205A" class="w-full h-40 object-cover">
+                  <div class="p-4">
+                      <h3 class="text-lg font-bold text-teal-600">Auditorium  2</h3>
+                      <div class="flex gap-2 mt-4">
+                        <button class="w-1/2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg" onclick="showRoomDetails('Auditorium 2', 'RAWND Hotel', '1', '500 orang')">
+                          View Details
+                      </button>
+                      <a href="#kontak" class="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+                        Booking
+                    </a>
+                      </div>
+                  </div>
+              </div>
+
+
+               <!-- Card 6 -->
+               <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvrD94kBUPt4J5s56TJxX2m4oJBgHs2SstMw&s" alt="Lab B2 205A" class="w-full h-40 object-cover">
+                     <div class="p-4">
+                         <h3 class="text-lg font-bold text-teal-600">Ruangan 4</h3>
+                           <div class="flex gap-2 mt-4">
+                            <button class="w-1/2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg" onclick="showRoomDetails('Ruangan 4', 'RAWND Hotel', '3', '12 orang')">
+                              View Details
+                          </button>
+                          <a href="#kontak" class="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+                            Booking
+                        </a>
+                           </div>
+                       </div>
+                  </div>
+
+
+                  <!-- Card 7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvlKSKouAkJXIeSeafFZ4CZgpUtfvaB8d79xMJVT53pvGbi_KEhAfT4sMqAe3oFStz5I4&usqp=CAU" alt="Lab B2 205A" class="w-full h-40 object-cover">
+                  <div class="p-4">
+                      <h3 class="text-lg font-bold text-teal-600">Ruangan 5</h3>
+                       <div class="flex gap-2 mt-4">
+                        <button class="w-1/2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg" onclick="showRoomDetails('Ruangan 5', 'RAWND Hotel', '3', '16 orang')">
+                          View Details
+                      </button>
+                      <a href="#kontak" class="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+                        Booking
+                    </a>
+                      </div>
+                  </div>
+              </div>
+    
+                <!-- Card 8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                  <img src="https://media-cdn.tripadvisor.com/media/photo-s/14/34/0e/c2/private-room.jpg" alt="Lab B1 101" class="w-full h-40 object-cover">
+                  <div class="p-4">
+                      <h3 class="text-lg font-bold text-teal-600">Ruangan 6</h3>
+                      <div class="flex gap-2 mt-4">
+                          <button class="w-1/2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg" onclick="showRoomDetails('Ruangan 6', 'RAWND Hotel', '3', '8 orang')">
+                              View Details
+                          </button>
+                          <a href="#kontak" class="w-1/2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center">
+                              Booking
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              
+    </section>
+
+   
+<!-- Room Details Modal -->
+<section id="room-details-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+  <div class="bg-white rounded-lg p-6 max-w-md w-full">
+      <h3 class="text-2xl font-bold text-teal-600 mb-4" id="modal-title">Detail Ruangan</h3>
+      <p class="text-sm text-gray-600 mb-4" id="modal-location">Lokasi: </p>
+      <p class="text-sm text-gray-600 mb-4" id="modal-floor">Lantai: </p>
+      <p class="text-sm text-gray-600 mb-4" id="modal-bookings">Kapasits: </p>
+      <button id="close-modal" class="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg" onclick="closeModal()">Tutup</button>
+  </div>
+</section>
+
+<script>
+  // Menampilkan detail ruangan
+  function showRoomDetails(name, location, floor, bookings) {
+      // Update konten modal
+      document.getElementById('modal-title').innerText = name;
+      document.getElementById('modal-location').innerText = "Lokasi: " + location;
+      document.getElementById('modal-floor').innerText = "Lantai: " + floor;
+      document.getElementById('modal-bookings').innerText = "Kapasitas: " + bookings;
+      
+      // Menampilkan modal
+      document.getElementById('room-details-modal').classList.remove('hidden');
+  }
+
+  
+  // Menutup modal detail ruangan
+  function closeModal() {
+      document.getElementById('room-details-modal').classList.add('hidden');
+  }
+
+  
+</script>
+
+<!-- Contact Section -->
+<section class="max-w-6xl mx-auto my-12 px-4">
+  <div class="lg:flex lg:justify-between">
+      <!-- Contact Information -->
+      <div class="lg:w-1/3 space-y-6">
+          <h2 id="kontak" class="text-xl font-semibold text-gray-800">Kontak Kami</h2>
+          <p class="text-gray-600">Untuk informasi lebih lanjut, Anda bisa menghubungi kami melalui:</p>
+          <div class="space-y-4">
+              <div class="flex items-center text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 2l20 20M2 22l20-20" />
+                  </svg>
+                  <span>Email: <a href="mailto:info@hotel.com" class="text-blue-500">@RawndRoomBooking.ac.id</a></span>
+              </div>
+              <div class="flex items-center text-gray-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 3v18M6 3h12M18 3v18M18 3h-12" />
+                  </svg>
+                  <span>Telepon: <a href="tel:+621234567890" class="text-blue-500">+62 123 456 7890</a></span>
+              </div>
+          </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="lg:w-2/3">
+          <h2 class="text-xl font-semibold text-gray-800">Form Peminjaman Ruangan</h2>
+          <form action="#" method="POST" class="mt-6 bg-white p-6 rounded-lg shadow-md space-y-6">
+              <div>
+                  <label for="name" class="block text-gray-700">Nama Lengkap</label>
+                  <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+              </div>
+
+              <div>
+                  <label for="email" class="block text-gray-700">Email</label>
+                  <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+              </div>
+
+              <div>
+                  <label for="phone" class="block text-gray-700">Nomor Telepon</label>
+                  <input type="text" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+              </div>
+
+              <div>
+                  <label for="message" class="block text-gray-700">Pesan</label>
+                  <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Kirim Permintaan</button>
+          </form>
+      </div>
+  </div>
+  </section>
+
+
+
+    
+
+
+
+    <section class="developer-profile" id="pengembang">
+      <h4 class="text-2xl font-semibold text-center mb-8">Profil Pengembang</h4>
+      
+      <!-- Kontainer dengan grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+        
+        <!-- Pengembang 1 -->
+        <div class="profile-container max-w-xs w-full bg-white rounded-lg shadow-md p-4">
+          <div class="profile-img mb-4 flex justify-center">
+            <img src="./img/image.png" alt="Pengembang 1" class="w-32 h-32 object-cover rounded-full">
+          </div>
+          <div class="profile-info text-center">
+            <h5 class="text-lg font-bold mb-2">Rian Akhlul Fadli</h5>
+            <p class="text-gray-700 mb-4">Saya adalah mahasiswa Sekolah Tinggi Terpadu Nurul Fikri.</p>
+            <div class="social-links space-x-4">
+              <a href="https://www.linkedin.com/in/rian-akhlul-fadli-34b4bb33b/" target="_blank" class="text-blue-500 hover:underline">LinkedIn</a>
+              <a href="https://github.com/win-ter-ethreal" target="_blank" class="text-gray-900 hover:underline">GitHub</a>
+              <a href="mailto:rianakhlulfadli@gmamil.com" class="text-gray-900 hover:underline">Email</a>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Pengembang 2 -->
+        <div class="profile-container max-w-xs w-full bg-white rounded-lg shadow-md p-4">
+          <div class="profile-img mb-4 flex justify-center">
+            <img src="./img/Gambar WhatsApp 2025-01-23 pukul 13.58.45_0115518e.jpg" alt="Pengembang 2" class="w-32 h-32 object-cover rounded-full">
+          </div>
+          <div class="profile-info text-center">
+            <h5 class="text-lg font-bold mb-2">Shofwatun Najwa</h5>
+            <p class="text-gray-700 mb-4">Saya adalah mahasiswa Sekolah Tinggi Terpadu Nurul Fikri.</p>
+            <div class="social-links space-x-4">
+              <a href="https://www.linkedin.com/in/najwa-shofwatun-93862133b/" target="_blank" class="text-blue-500 hover:underline">LinkedIn</a>
+              <a href="https://github.com/shofwatunnajwa" target="_blank" class="text-gray-900 hover:underline">GitHub</a>
+              <a href="mailto:Shofwatunnajwa22@gmail.com" class="text-gray-900 hover:underline">Email</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pengembang 3 -->
+        <div class="profile-container max-w-xs w-full bg-white rounded-lg shadow-md p-4">
+          <div class="profile-img mb-4 flex justify-center">
+            <img src="./img/WhatsApp Image 2025-01-23 at 14.53.33_7e19ff5d.jpg" alt="Pengembang 4" class="w-32 h-32 object-cover rounded-full">
+          </div>
+          <div class="profile-info text-center">
+            <h5 class="text-lg font-bold mb-2">Nabib Khalish Alfayadh</h5>
+            <p class="text-gray-700 mb-4">Saya adalah mahasiswa Sekolah Tinggi Terpadu Nurul Fikri.</p>
+            <div class="social-links space-x-4">
+              <a href="https://id.linkedin.com/in/nabib-khalis-bb113133b " target="_blank" class="text-blue-500 hover:underline">LinkedIn</a>
+              <a href="https://github.com/nabobbieberr" target="_blank" class="text-gray-900 hover:underline">GitHub</a>
+              <a href="mailto:bibskhalis@gmail.com" class="text-gray-900 hover:underline">Email</a>
+            </div>
+          </div>
+        </div>
+        
+    
+
+        <!-- Pengembang 4 -->
+        <div class="profile-container max-w-xs w-full bg-white rounded-lg shadow-md p-4">
+          <div class="profile-img mb-4 flex justify-center">
+            <img src="./img/WhatsApp Image 2025-01-23 at 14.53.33_eb031da3.jpg" alt="Pengembang 3" class="w-32 h-32 object-cover rounded-full">
+          </div>
+          <div class="profile-info text-center">
+            <h5 class="text-lg font-bold mb-2">Ahmad Yudistira Ramdhany</h5>
+            <p class="text-gray-700 mb-4">Saya adalah mahasiswa Sekolah Tinggi Terpadu Nurul Fikri.</p>
+            <div class="social-links space-x-4">
+              <a href="https://www.linkedin.com/in/ahmad-yudistira-ramdhany-5b934633b" target="_blank" class="text-blue-500 hover:underline">LinkedIn</a>
+              <a href="https://github.com/Ahmadyudistiraramdhany" target="_blank" class="text-gray-900 hover:underline">GitHub</a>
+              <a href="mailto:ahmadyudistiraramdhany@gmail.com" class="text-gray-900 hover:underline">Email</a>
+            </div>
+          </div>
+        </div>
+    
+        
+      </div>
+    </section>
+    
+    
+    
+
+
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+
+      <div class="footer-container max-w-screen-xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Footer -->
+        <div class="footer-left">
+          <img src="./img/logo mamas.jpg" alt="RAWND LOGO" class="footer-logo mb-4">
+          <p class="text-sm">Jl. Akses UI Jl.Klp. Dua Raya No.88A</p>
+          <p class="text-sm">
+            <i class="fa fa-envelope"></i> sekretariat@Rawndroombooking.ac.id
+          </p>
+          <p class="text-sm">
+            <i class="fa fa-phone"></i> 021-3857245
+          </p>
+          <div class="footer-social mt-4 space-x-4">
+            <a href="https://www.instagram.com" target="_blank" class="text-white hover:text-gray-400"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank" class="text-white hover:text-gray-400"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.twitter.com" target="_blank" class="text-white hover:text-gray-400"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.tiktok.com" target="_blank" class="text-white hover:text-gray-400"><i class="fa fa-tiktok"></i></a>
+          </div>
+        </div>
+    
+        <!-- Links 1 -->
+        <div class="footer-links">
+          <h3 class="text-lg font-semibold mb-2">BERANDA</h3>
+          <h3 class="text-lg font-semibold mb-2">TENTANG KAMI</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#tentang" class="hover:text-gray-400">Profil Perusahaan</a></li>
+            <li><a href="#" class="hover:text-gray-400">Visi & Misi</a></li>
+            <li><a href="#" class="hover:text-gray-400">Nilai Perusahaan</a></li>
+            <li><a href="#" class="hover:text-gray-400">Keunggulan Kami</a></li>
+            <li><a href="#" class="hover:text-gray-400">Tonggak Sejarah</a></li>
+            <li><a href="#" class="hover:text-gray-400">Grup</a></li>
+          </ul>
+        </div>
+    
+        <!-- Links 2 -->
+        <div class="footer-links">
+          <h3 class="text-lg font-semibold mb-2">&nbsp;</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-gray-400">Manajemen</a></li>
+            <li><a href="#" class="hover:text-gray-400">Dewan Komisaris</a></li>
+            <li><a href="#" class="hover:text-gray-400">Direksi</a></li>
+            <li><a href="#" class="hover:text-gray-400">Struktur Organisasi</a></li>
+            <li><a href="#" class="hover:text-gray-400">Piagam & Penghargaan</a></li>
+            <li><a href="#" class="hover:text-gray-400">Kebijakan Privasi</a></li>
+          </ul>
+        </div>
+    
+        <!-- Links 3 -->
+        <div class="footer-links">
+          <h3 class="text-lg font-semibold mb-2">PRODUCTS & SERVICES</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#home" class="hover:text-gray-400">Room Booking RAWND Mobile</a></li>
+          </ul>
+          <h3 class="text-lg font-semibold mb-2">OUTLET</h3>
+          <h3 class="text-lg font-semibold mb-2">KEBERLANJUTAN</h3>
+          <h3 class="text-lg font-semibold mb-2">BERITA</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-gray-400">Berita</a></li>
+            <li><a href="#" class="hover:text-gray-400">Promo</a></li>
+            <li><a href="#" class="hover:text-gray-400">Articles</a></li>
+            <li><a href="#" class="hover:text-gray-400">Pengadaan</a></li>
+          </ul>
+        </div>
+    
+        <!-- Links 4 -->
+        <div class="footer-links">
+          <h3 class="text-lg font-semibold mb-2">KARIR</h3>
+          <h3 class="text-lg font-semibold mb-2">KONTAK</h3>
+        </div>
+      </div>
+    
+      <!-- Footer -->
+      <div class="footer-bottom bg-gray-900 text-center py-4 mt-8">
+        <p class="text-sm">© 2025 RAWND Room Booking. All rights reserved.</p>
+      </div>
+    </footer>
+
+    
+
+    <script>
+        document.addEventListener("scroll", function () {
+            const parallaxSections = document.querySelectorAll(".parallax");
+            parallaxSections.forEach((section) => {
+                const speed = section.getAttribute("data-speed");
+                const offset = window.pageYOffset;
+                section.style.backgroundPositionY = `${offset * speed}px`;
+            });
+        });
+
+        let navbar = document.getElementById("navbar");
+    let timer;
+
+    </script>
+</body>
+
+</html>
